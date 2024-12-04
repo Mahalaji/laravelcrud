@@ -1,0 +1,57 @@
+.form1{
+    background:ghostwhite;
+    padding: 15px;
+    margin-top:40px;
+    width: 50rem;
+    position: absolute;
+    left:35%;
+    border-radius: 15px;
+}
+input{
+    width: 330px;
+    height: 30px;
+    border-radius: 7px;
+    text-align: center;
+}
+input[type="text"]{
+    font-size: 18px;
+}
+input[type="email"]{
+    font-size: 18px;
+}
+input[type="submit"]{
+    font-size: 20px;
+    height: 40px;
+    background-color: #00FF7F;
+
+}
+
+input[type="submit"]:hover{
+    color:white;	
+    background-color: blue;	
+}
+select{
+    size:400px;
+    height: 30px;
+    width: 252px;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 18px;
+}
+input[type="radio"]
+{
+    font-size: 14px;
+    size: 10px;
+    height:12px;
+}
+#d{
+    display: flex;
+    flex-direction: row;
+    column-gap: 50px;
+  }
+  h1{
+    color: black;
+    font-size: 60px;
+    margin-top: 20px;
+    padding-left: 18rem;
+}

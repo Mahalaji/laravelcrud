@@ -67,4 +67,60 @@ class User extends Controller
         // Authentication failed
         return back()->withErrors(['email' => 'Invalid credentials'])->withInput();
     }
+     function updateprofile(Request $request)
+    {
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'gender' => 'required',
+            'email' => 'required|email',
+            'mobilenumber' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'pincode' => 'required|integer',
+            'country' => 'required',
+            'address' => 'required',
+        ]);
+        $Userdetails = Userdetails::find($request->id); 
+        
+        if (!$Userdetails) {
+            return redirect()->back()->withErrors(['error' => 'User not found']);
+        }
+    
+        $Userdetails->first_name = $request->first_name;
+        $Userdetails->last_name = $request->last_name;
+        $Userdetails->gender = $request->gender;
+        $Userdetails->email = $request->email;
+        $Userdetails->mobilenumber = $request->mobilenumber;
+        $Userdetails->city = $request->city;
+        $Userdetails->state = $request->state;
+        $Userdetails->pincode = $request->pincode;
+        $Userdetails->country = $request->country;
+        $Userdetails->address = $request->address;
+        $Userdetails->password = $request->password;
+
+    
+        $Userdetails->save();
+        session(['user' => $Userdetails]); 
+    
+        return redirect('/dashboard')->with('success', 'Profile updated successfully');
+    }
+    function adminpassword(Request $request){
+        $request->validate([
+            'oldpassword' => 'required',
+            'newpassword' => 'required',
+        ]);
+        $user = Login::where('id', $request->id)->first();
+
+        if ($user && $user->password == $request->oldpassword) {
+            $user->update([
+                'password'=>$request->newpassword
+            ]);
+            session(['user' => $user]); 
+            return redirect('/dashboard');
+        }
+        
+        return back()->withErrors(['password' => 'Invalid oldpassword'])->withInput();        
+    }
+    
 }
