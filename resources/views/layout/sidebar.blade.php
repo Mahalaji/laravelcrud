@@ -31,8 +31,8 @@
                             <i class="fa fa-caret-down"></i>
                         </button>
                         <div class="dropdown-container">
-                            <a href=""><i class="fas fa-blog"></i> Blog List</a>
-                            <a href=""><i class="fa fa-list"></i> Category</a>
+                            <a href="/bloglist"><i class="fas fa-blog"></i> Blog List</a>
+                            <a href="/blogcategorylist"><i class="fa fa-list"></i> Category</a>
                         </div>
                     </li>
                     <li>
