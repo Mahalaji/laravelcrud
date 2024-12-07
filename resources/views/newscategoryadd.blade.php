@@ -1,9 +1,10 @@
+
 <link rel="stylesheet" href="{{ asset('css/blogadd.css') }}">
 @extends('layout.app')
 @section('content')
 <main id="main" class="main"></main>
 <h1 class="header">Add Category</h1>
-<form class="simple" method="post" action="/addcategery" >
+<form class="simple" method="post" action="/createnewscategory" >
 <div class="form1">
 @csrf
     <div class="input-group">

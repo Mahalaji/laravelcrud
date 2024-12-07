@@ -1,8 +1,8 @@
 @extends('layout.app')
 @section('content')
-<link rel="stylesheet" href="{{ asset('css/edituser.css') }}">
+<link rel="stylesheet" href="{{ asset('css/blogadd.css') }}">
 <main id="main" class="main">
-    <h1>Update User Details</h1>
+    <h1 >Update User Details</h1>
     <div class="form1">
         <form class="simple" action="/updateuserdetails" method="post">
             @csrf

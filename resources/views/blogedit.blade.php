@@ -2,9 +2,10 @@
 @extends('layout.app')
 @section('content')
 <main id="main" class="main"></main>
-<h1>Blog Edit</h1>
+<h1 class="header">Blog Edit</h1>
 <form class="simple" method="post" action="/update" enctype="multipart/form-data">
-    @csrf
+<div class="form1">
+@csrf
     <div class="input-group">
         <label>Title</label><br>
         <input type="text" id="Title" name="Title" value="{{ old('Title', $blog->Title) }}">
@@ -56,6 +57,7 @@
     <div class="submit">
         <button type="submit" class="btn" name="update">Update Blog</button>
     </div>
+</div>
 </form>
 <script>
 function lettersOnly(input) {
@@ -63,6 +65,7 @@ function lettersOnly(input) {
     input.value = input.value.replace(regex, "");
 }
 </script>
+<script src="https://cdn.ckeditor.com/4.20.2/standard/ckeditor.js"></script>
 <script>
 ClassicEditor
     .create(document.querySelector('#editor'))

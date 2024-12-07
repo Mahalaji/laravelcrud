@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Laravel')</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+<script src="https://cdn.ckeditor.com/4.20.2/standard/ckeditor.js"></script>
 </head>
 
 <body>
@@ -16,5 +17,4 @@
    @yield('content')
     </main>
 </body>
-
 </html>

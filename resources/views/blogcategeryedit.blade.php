@@ -2,33 +2,34 @@
 @extends('layout.app')
 @section('content')
 <main id="main" class="main"></main>
-<h1 class="header">Add Category</h1>
-<form class="simple" method="post" action="/addcategery" >
+<h1 class="header">Edit Category</h1>
+<form class="simple" method="post" action="/updatecategery" >
 <div class="form1">
 @csrf
     <div class="input-group">
         <label>Seo Title</label><br>
-        <input type="text" id="seo_title" name="seo_title">
+        <input type="text" id="seo_title" name="seo_title" value="{{ old('seo_title', $blogcategory->seo_title) }}">
     </div>
     <p>@error('seo_title'){{$message}}@enderror</p>
     <div class="input-group">
         <label>Meta Keyword</label><br>
-        <input type="text" id="meta_keyword" name="meta_keyword">
+        <input type="text" id="meta_keyword" name="meta_keyword" value="{{ old('meta_keyword', $blogcategory->meta_keyword) }}">
     </div>
     <p>@error('meta_keyword'){{$message}}@enderror</p>
     <div class="input-group">
         <label>Seo Robat</label><br>
-        <input type="text" id="seo_robat" name="seo_robat">
+        <input type="text" id="seo_robat" name="seo_robat" value="{{ old('seo_robat', $blogcategory->seo_robat) }}">
     </div>
     <p>@error('seo_robat'){{$message}}@enderror</p>
+    <input type="hidden" id="id" name="id" value="{{ old('id', $blogcategory->id) }}">
     <div class="input-group">
         <label>Meta Description</label>
-        <textarea id="editor" name="meta_description">
+        <textarea id="editor" name="meta_description" >{{ old('meta_description', $blogcategory->meta_description) }}
          </textarea>
     </div>
     <p>@error('Description'){{$message}}@enderror</p>
     <div class="submit">
-        <button type="submit" class="btn" name="update">Add Category</button>
+        <button type="submit" class="btn" name="update">Update Category</button>
     </div>
 </div>
 </form>

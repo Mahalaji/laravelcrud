@@ -133,12 +133,12 @@ class User extends Controller
             $query = Userdetails::select('id', 'first_name', 'gender', 'email', 'city', 'state', 'mobilenumber', 'country');
             return DataTables::of($query)
                 ->addColumn('edit', function ($row) {
-                    return '<a href="/edit-user/' . $row->id . '" class="btn btn-sm btn-primary">Edit</a>';
+                    return '<a href="/edit-user/' . $row->id . '" class="btn btn-sm btn-primary" style="color:black"><i class="fas fa-edit"></i></a>';
                 })
                 ->addColumn('delete', function ($row) {
                     return '<form action="/delete-user/' . $row->id . '" method="POST" onsubmit="return confirm(\'Are you sure?\');">
                                 ' . csrf_field() . '
-                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-sm btn-danger" style="border: none; outline: none;"><i class="fas fa-trash"></i></button>
                             </form>';
                 })
                 ->rawColumns(['edit', 'delete'])

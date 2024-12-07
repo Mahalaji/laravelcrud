@@ -57,22 +57,33 @@ class blogs extends Controller
         $Blogadd->save();
     
         if ($Blogadd) {
-            return redirect('/dashboard')->with('success', 'Blog added successfully!');
+            return redirect('/bloglist')->with('success', 'Blog added successfully!');
         } else {
             return back()->with('error', 'Failed to add the blog.');
         }
     }
-    public function getBlogsAjax(Request $request){
+    public function getBlogsAjax(Request $request)
+    {
         try {
             $query = Blog::select('id', 'Name', 'Title', 'blog_title_category', 'Description', 'Create_Date', 'Update_Date', 'post_Date');
+    
+            if ($request->has('start_date') && $request->has('end_date')) {
+                $startDate = $request->start_date;
+                $endDate = $request->end_date;
+    
+                if ($startDate && $endDate) {
+                    $query->whereBetween('post_Date', [$startDate, $endDate]);
+                }
+            }
+    
             return DataTables::of($query)
                 ->addColumn('edit', function ($row) {
-                    return '<a href="/edit/' . $row->id . '" class="btn btn-sm btn-primary">Edit</a>';
+                    return '<a href="/edit/' . $row->id . '" class="btn btn-sm btn-primary"style="color:black"><i class="fas fa-edit"></i></a>';
                 })
                 ->addColumn('delete', function ($row) {
                     return '<form action="/destory/' . $row->id . '" method="POST" onsubmit="return confirm(\'Are you sure?\');">
                                 ' . csrf_field() . '
-                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-sm btn-danger" style="border: none; outline: none;"><i class="fas fa-trash"></i></button>
                             </form>';
                 })
                 ->rawColumns(['edit', 'delete'])
@@ -158,12 +169,12 @@ public function getBlogsCategoryAjax(Request $request){
         $query = Blogcategory::select('id', 'seo_title', 'meta_keyword', 'seo_robat', 'meta_description');
         return DataTables::of($query)
             ->addColumn('edit', function ($row) {
-                return '<a href="/editcategory/' . $row->id . '" class="btn btn-sm btn-primary">Edit</a>';
+                return '<a href="/editcategory/' . $row->id . '" class="btn btn-sm btn-primary"style="color:black"><i class="fas fa-edit"></i></a>';
             })
             ->addColumn('delete', function ($row) {
                 return '<form action="/destorycategory/' . $row->id . '" method="POST" onsubmit="return confirm(\'Are you sure?\');">
                             ' . csrf_field() . '
-                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-sm btn-danger"style="border: none; outline: none;"><i class="fas fa-trash"></i></button>
                         </form>';
             })
             ->rawColumns(['edit', 'delete'])
@@ -194,4 +205,53 @@ public function addcategery(Request $request){
         return back()->with('error', 'Failed to add the blog.');
     }
 }
+public function destorycategory($id){
+    $blogcategory = Blogcategory::find($id); 
+
+    if (!$blogcategory) {
+        return redirect()->back()->withErrors(['error' => 'User not found']);
+    }
+
+    $blogcategory->delete();
+
+    return redirect('/blogcategorylist')->with('success', 'User deleted successfully');
+}
+public function editcategory($id){
+    $blogcategory = Blogcategory::find($id); 
+
+    if (!$blogcategory) {
+        return redirect()->back()->with('error', 'User not found');
+    }
+
+    if (!is_object($blogcategory)) {
+        return redirect()->back()->with('error', 'Invalid user data');
+    }
+
+    return view('blogcategeryedit', compact('blogcategory'));
+}
+public function updateCategory(Request $request)
+{
+    $request->validate([
+        'seo_title' => 'required',
+        'meta_keyword' => 'required',
+        'seo_robat' => 'required',
+        'meta_description' => 'required',
+    ]);
+
+    $categoryupdate = Blogcategory::find($request->id);
+
+    if (!$categoryupdate) {
+        return redirect()->back()->withErrors(['error' => 'Blog category not found']);
+    }
+
+    $categoryupdate->seo_title = $request->seo_title;
+    $categoryupdate->meta_keyword = $request->meta_keyword;
+    $categoryupdate->seo_robat = $request->seo_robat;
+    $categoryupdate->meta_description = $request->meta_description;
+
+    $categoryupdate->save();
+
+    return redirect('/blogcategorylist')->with('success', 'Blog category updated successfully');
+}
+
 }

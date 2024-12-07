@@ -1,21 +1,21 @@
-<link rel="stylesheet" href="{{ asset('css/user.css') }}">
+<link rel="stylesheet" href="{{ asset('css/blog.css') }}">
 @extends('layout.app')
-@section('title', 'Users List')
+@section('title', 'Blog Category List')
 @section('content')
 <div class="container mt-4">
-    <h2>Users List</h2>
+    <h2>News Category List</h2>
+    <form class="left"  method="post">
+    <a href="{{ asset('/newscategoryadd') }}" style="padding: 10px; background: azure; text-decoration: none; color: black; border-radius: 5px; font-size: 14px; border: 1px solid black;">Add-Category</a>
+    </form>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <table id="userTable" class="table table-bordered table-striped" style="width: 1180px;">
+    <table id="NewsCategoryTable" class="table table-bordered table-striped" style="width: 1180px;">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>First Name</th>
-                <th>Gender</th>
-                <th>Email</th>
-                <th>City</th>
-                <th>State</th>
-                <th>Phone No.</th>
-                <th>Country</th>
+                <th>seo title</th>
+                <th>meta keyword</th>
+                <th>seo robat</th>
+                <th>meta description</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -39,23 +39,20 @@
         });
 
         
-        $('#userTable').DataTable({
+        $('#NewsCategoryTable').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
-                url: '/getUsersAjax',
+                url: '/getNewsCategoryAjax',
                 type: 'POST',
             },
             pageLength: 5, 
             columns: [
                 { data: 'id', name: 'id' },
-                { data: 'first_name', name: 'first_name' },
-                { data: 'gender', name: 'gender' },
-                { data: 'email', name: 'email' },
-                { data: 'city', name: 'city' },
-                { data: 'state', name: 'state' },
-                { data: 'mobilenumber', name: 'mobilenumber' },
-                { data: 'country', name: 'country' },
+                { data: 'seo_title', name: 'seo_title' },
+                { data: 'meta_keyword', name: 'meta_keyword' },
+                { data: 'seo_robat', name: 'seo_robat' },
+                { data: 'meta_description', name: 'meta_description' },
                 { data: 'edit', orderable: false, searchable: false },
                 { data: 'delete', orderable: false, searchable: false },
             ],
@@ -63,3 +60,5 @@
     });
 </script>
 @endsection
+
+

@@ -3,12 +3,12 @@
 @section('title', 'Blog Category List')
 @section('content')
 <div class="container mt-4">
-    <h2>Blogs List</h2>
+    <h2>Blogs Category List</h2>
     <form class="left"  method="post">
     <a href="{{ asset('/blogcategoryadd') }}" style="padding: 10px; background: azure; text-decoration: none; color: black; border-radius: 5px; font-size: 14px; border: 1px solid black;">Add-Category</a>
     </form>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <table id="BlogsCategoryTable" class="table table-bordered table-striped">
+    <table id="BlogsCategoryTable" class="table table-bordered table-striped" style="width: 1180px;">
         <thead>
             <tr>
                 <th>ID</th>
