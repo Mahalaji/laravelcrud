@@ -102,6 +102,85 @@ h2{
     margin-top: 10px;
     
 }
+.form-row {
+    background: #fff;
+    padding: 30px;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 800px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-row .input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    font-size: 16px;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-group input,
+.input-wrapper textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 7px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.input-group input[type="date"] {
+    padding-left: 15px;
+}
+
+.input-group .error-message {
+    color: red;
+    font-size: 14px;
+}
+#address-overlay {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    z-index: 9999;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Style for the content inside the overlay */
+#address-overlay > div {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    margin: 0 auto;
+    max-height: 80%;  /* Set max height to 80% of viewport height */
+    overflow-y: auto; /* Make the form container scrollable */
+}
+
+/* Optional: Add a smooth transition effect for the overlay */
+#address-overlay {
+    transition: opacity 0.3s ease;
+}
+.delete-address-btn{
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 11px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
 .info{
     padding: 40px;
   }

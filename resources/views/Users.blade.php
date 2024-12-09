@@ -2,8 +2,13 @@
 @extends('layout.app')
 @section('title', 'Users List')
 @section('content')
+<div class="info" style="background: white;">
 <div class="container mt-4">
     <h2>Users List</h2>
+    <form class="left" method="post">
+            <a href="{{ asset('/useradd') }}"
+                style="padding: 10px; background: azure; text-decoration: none; color: black; border-radius: 5px; font-size: 14px; border: 1px solid black;">Add-User</a>
+        </form>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <table id="userTable" class="table table-bordered table-striped" style="width: 1180px;">
         <thead>
@@ -23,7 +28,7 @@
         <tbody></tbody>
     </table>
 </div>
-
+</div>
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

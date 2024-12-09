@@ -45,9 +45,9 @@
                         </div>
                     </li>
 
-                    <li><a href=""><i class="fa fa-copy"></i> Pages</a></li>
+                    <li><a href="/indexpages"><i class="fa fa-copy"></i> Pages</a></li>
                     <li><a href="/users"><i class="fas fa-users"></i> Users</a></li>
-                    <li><a href=""><i class="far fa-address-book"></i> Company Profile</a></li>
+                    <li><a href="/indexcompany"><i class="far fa-address-book"></i> Company Profile</a></li>
 
 
                 </ul>

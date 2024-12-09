@@ -4,13 +4,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User;
 use App\Http\Controllers\blogs;
 use App\Http\Controllers\newss;
+use App\Http\Controllers\pagess;
+use App\Http\Controllers\companies;
+
+
 
 
 Route::get('/', function () {
     return view('welcome');
 });
-Route::view('/register','register');
-Route::post('/adduser',[User::class,'adduser']);
+Route::view('/useradd','register');
+Route::post('/createuser',[User::class,'createuser']);
 Route::view('/login','login');
 Route::post('/loginvalidation',[User::class,'loginvalidation']);
 Route::view('/dashboard','dashboard');
@@ -55,6 +59,34 @@ Route::post('/createnewscategory',[newss::class,'createnewscategory']);
 Route::get('/editnewscategory/{id}', [newss::class, 'editnewscategory']);
 Route::post('/updatenewscategery',[newss::class,'updatenewscategery']);
 Route::post('/destorynewscategory/{id}', [newss::class, 'destorynewscategory']);
+
+Route::view('/indexpages','pageslist');
+Route::post('/getPagesAjax', [pagess::class, 'getPagesAjax']);
+Route::get('/editpages/{id}', [pagess::class, 'editpages']);
+Route::post('/updatepages',[pagess::class,'updatepages']);
+Route::view('/pagesadd','pagesadd');
+Route::post('/createpages',[pagess::class,'createpages']);
+Route::post('/destorypages/{id}', [pagess::class, 'destorypages']);
+
+Route::view('/indexcompany','companylist');
+Route::post('/getCompanyAjax', [companies::class, 'getCompanyAjax']);
+Route::view('/companyadd','companyadd');
+Route::post('/createcompany',[companies::class,'createcompany']);
+Route::get('/editcompany/{id}', [companies::class, 'editcompany']);
+Route::post('/updatecompany',[companies::class,'updatecompany']);
+Route::post('/destorycompany/{id}', [companies::class, 'destorycompany']);
+Route::post('/getCompanyaddress', [companies::class, 'getCompanyaddress']);
+Route::post('/deleteCompanyAddress', [companies::class, 'deleteaddress']);
+Route::post('/saveCompanyAddress', [companies::class, 'saveCompanyAddress']);
+
+
+
+
+
+
+
+
+
 
 
 

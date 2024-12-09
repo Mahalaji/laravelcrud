@@ -1,5 +1,5 @@
 .form1{
-    background:ghostwhite;
+    background:grey;
     padding: 15px;
     margin-top:40px;
     width: 50rem;
@@ -50,8 +50,9 @@ input[type="radio"]
     column-gap: 50px;
   }
   h1{
-    color: black;
+    color: grey;
     font-size: 60px;
-    margin-top: 20px;
-    padding-left: 18rem;
+    margin-top: 35px;
+    font-family: cursive;
+    padding-left: 30rem;
 }

@@ -31,8 +31,14 @@ h2{
     padding-bottom: 30px;
     font-size: 40px;
     margin-top: 60px;
-    padding-left: 13em;
 }
 #userTable_filter{
     padding-bottom: 10px;
 }
+.left{
+    padding-bottom: 23px;
+    text-align: end;
+}
+.info{
+    padding: 40px;
+  }

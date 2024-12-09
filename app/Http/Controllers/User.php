@@ -17,7 +17,7 @@ use function Laravel\Prompts\select;
 
 class User extends Controller
 {
-    function adduser(Request $request){
+    function createuser(Request $request){
         $request->validate([
             'first_name'=>'required',
             'last_name'=>'required',
@@ -46,7 +46,7 @@ class User extends Controller
         $Userdetails->address=$request->address;
         $Userdetails->save();
         if($Userdetails){
-            return redirect('/login');
+            return redirect('/users');
         }
         else{
             return "not done";
@@ -126,7 +126,6 @@ class User extends Controller
         
         return back()->withErrors(['password' => 'Invalid oldpassword'])->withInput();        
     }
-    
     public function getUsersAjax(Request $request)
     {
         try {
