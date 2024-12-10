@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="{{ asset('css/blog.css') }}">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 @extends('layout.app')
 @section('title', 'News List')
 @section('content')
@@ -6,7 +7,7 @@
     <div class="container mt-4">
         <h2>News List</h2>
         <form class="left" method="post">
-            <a href=""><i class='fas fa-eye' style='font-size:18px;color:black'></i></a>
+            <a href="/blogview"><i class='fas fa-eye' style='font-size:18px;color:black'></i></a>
 
             <form class="left" method="post">
                 <a href="{{ asset('/newsadd') }}"
@@ -43,8 +44,9 @@
             </table>
     </div>
 </div>
+@endsection
+@section('scripts')
 
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
@@ -82,8 +84,8 @@ $(document).ready(function() {
                 name: 'Title'
             },
             {
-                data: 'news_title_category',
-                name: 'news_title_category'
+                data: 'categories.seo_title',
+                name: 'categories.seo_title'
             },
             {
                 data: 'Description',

@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="{{ asset('css/blogadd.css') }}">
 @extends('layout.app')
 @section('content')
-<main id="main" class="main"></main>
+<main id="main" class="main">
 <h1 class="header">News Add</h1>
 <form class="simple" method="post" action="/createnews" enctype="multipart/form-data">
 <div class="form1">
@@ -23,7 +23,7 @@
         <select id="news_title_category" name="news_title_category" >
             <option value="">Select News Category</option>
             @foreach($titles as $title)
-            <option value="{{ $title->seo_title }}">{{ $title->seo_title }}
+            <option value="{{ $title->id }}">{{ $title->seo_title }}
             </option>
             @endforeach
         </select>
@@ -68,6 +68,10 @@
     </div>
 </div>
 </form>
+</main>
+@endsection
+@section('scripts')
+
 <script>
 function lettersOnly(input) {
     var regex = /[^a-z ]/gi;

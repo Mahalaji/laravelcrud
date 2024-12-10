@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="{{ asset('css/blogadd.css') }}">
 @extends('layout.app')
 @section('content')
-<main id="main" class="main"></main>
+<main id="main" class="main">
 <h1 class="header">Page Edit</h1>
 <form class="simple" method="post" action="/updatepages" enctype="multipart/form-data">
 <div class="form1">
@@ -42,6 +42,9 @@
     </div>
 </div>
 </form>
+</main>
+@endsection
+@section('scripts')
 <script>
 function lettersOnly(input) {
     var regex = /[^a-z ]/gi;
@@ -60,5 +63,4 @@ editor.resize(300, 500);
 <script>
 CKEDITOR.replace('editor')
 </script>
-</main>
 @endsection

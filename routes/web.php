@@ -32,8 +32,8 @@ Route::post('/delete-user/{id}', [User::class, 'deleteuser']);
 
 Route::get('/blogadd', [blogs::class, 'seo_title']);
 Route::post('/addblog',[blogs::class,'addblog']);
-Route::view('/bloglist','blog');
-Route::post('/getBlogsAjax', [blogs::class, 'getBlogsAjax']);
+// Route::view('/bloglist','blog');
+Route::get('/bloglist', [blogs::class, 'bloglistshow']);
 Route::get('/edit/{id}', [blogs::class, 'edit']);
 Route::post('/update',[blogs::class,'update']);
 Route::post('/destory/{id}', [blogs::class, 'destory']);
@@ -78,6 +78,9 @@ Route::post('/destorycompany/{id}', [companies::class, 'destorycompany']);
 Route::post('/getCompanyaddress', [companies::class, 'getCompanyaddress']);
 Route::post('/deleteCompanyAddress', [companies::class, 'deleteaddress']);
 Route::post('/saveCompanyAddress', [companies::class, 'saveCompanyAddress']);
+
+Route::view('/blogview','frontend.home');
+
 
 
 

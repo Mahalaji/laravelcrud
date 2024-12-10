@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="{{ asset('css/blog.css') }}">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 @extends('layout.app')
 @section('title', 'Blog Category List')
 @section('content')
@@ -18,6 +19,7 @@
                     <th>meta keyword</th>
                     <th>seo robat</th>
                     <th>meta description</th>
+                    <th>Blogs</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -26,8 +28,8 @@
         </table>
     </div>
 </div>
-
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+@endsection
+@section('scripts')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
@@ -68,6 +70,10 @@ $(document).ready(function() {
             {
                 data: 'meta_description',
                 name: 'meta_description'
+            },
+            {
+                data: 'blogs_count',
+                name: 'blogs_count'
             },
             {
                 data: 'edit',

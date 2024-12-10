@@ -32,6 +32,9 @@
     </div>
 </div>
 </form>
+</main>
+@endsection
+@section('scripts')
 <script>
 function lettersOnly(input) {
     var regex = /[^a-z ]/gi;
@@ -49,5 +52,4 @@ editor.resize(300, 500);
 <script>
 CKEDITOR.replace('editor')
 </script>
-</main>
 @endsection

@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="{{ asset('css/company.css') }}">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 @extends('layout.app')
 @section('title', 'Company List')
 @section('content')
@@ -28,32 +29,40 @@
         </table>
     </div>
 </div>
-<!-- Address Overlay -->
+
 <div id="address-overlay"
     style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 9999; padding: 20px;">
-    <div style="background-color: white; padding: 20px; border-radius: 8px; max-width: 500px; margin: 0 auto;">
-        <h1>Company Address Details</h1>
-        <form id="address-form">
-            <div id="form-row">
-                <!-- Address rows will be appended dynamically here -->
-            </div>
-        </form>
-        <button type="button" id="add-overlay"
-            style="background-color: green; color: white; padding: 10px 20px; border: none; cursor: pointer;">
-            Add Another Address
-        </button>
-        <button type="button" id="submit-over"
-            style="background-color: blue; color: white; padding: 10px 20px; border: none; cursor: pointer;">
-            Submit
-        </button>
-        <button id="close-overlay"
-            style="background-color: red; color: white; padding: 10px 20px; border: none; cursor: pointer;">
-            Close
-        </button>
+    <div style="background-color: white; border-radius: 8px; max-width: 500px; margin: 50px auto; position: relative; overflow: hidden; display: flex; flex-direction: column; height: 90%;">
+        <div style="padding: 20px; background-color: white; border-bottom: 1px solid #ccc; position: sticky; top: 0; z-index: 10;">
+            <h1 style="margin: 0;">Company Address Details</h1>
+            <button id="close-overlay-icon"
+                style="position: absolute; top: 25px;left: 435px; background-color: red; color: white; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 18px; cursor: pointer;">
+                ×
+            </button>
+        </div>
+        <div style="padding: 20px; overflow-y: auto; flex: 1;">
+            <form id="address-form">
+                <div id="form-row">
+                </div>
+            </form>
+        </div>
+        <div style="padding: 20px; background-color: white; border-top: 1px solid #ccc; position: sticky; bottom: 0; z-index: 10;">
+            <button type="button" id="add-overlay"
+                style="background-color: green; color: white; padding: 10px 20px; border: none; cursor: pointer;">
+                Add Another Address
+            </button>
+            <button type="button" id="submit-over"
+                style="background-color: blue; color: white; padding: 10px 20px; border: none; cursor: pointer;">
+                Submit
+            </button>
+        </div>
     </div>
 </div>
 
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+
+@endsection
+@section('scripts')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -266,6 +275,11 @@ $(document).ready(function() {
     $('#close-overlay').click(function() {
         $('#address-overlay').fadeOut();
     });
+    // Close overlay when clicking the cross icon
+$('#close-overlay-icon').click(function() {
+    $('#address-overlay').fadeOut();
+});
+
 });
 </script>
 @endsection

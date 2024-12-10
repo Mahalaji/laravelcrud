@@ -15,7 +15,7 @@ class newss extends Controller
 {
     public function seo_title()
     {
-        $titles = newscategory::select('seo_title')->get();
+        $titles = newscategory::select('seo_title','id')->get();
         return view('newsadd', compact('titles'));
     }
     function createnews(Request $request) {
@@ -68,7 +68,7 @@ class newss extends Controller
     public function getNewsAjax(Request $request)
     {
         try {
-            $query = news::select('id', 'Author_Name', 'Title', 'news_title_category', 'Description', 'Create_Date', 'Update_Date', 'Date');
+            $query = news::select('id', 'Author_Name', 'Title', 'news_title_category', 'Description', 'Create_Date', 'Update_Date', 'Date')->with('categories');
     
             if ($request->has('start_date') && $request->has('end_date')) {
                 $startDate = $request->start_date;
@@ -106,7 +106,7 @@ class newss extends Controller
             return redirect()->back()->with('error', 'Invalid user data');
         }
     
-        $titles = newscategory::select('seo_title')->get();
+        $titles = newscategory::select('seo_title','id')->get();
 
         return view('newsedit', compact('news', 'titles'));
     }

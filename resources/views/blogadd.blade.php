@@ -24,7 +24,7 @@
             <select id="blog_title_category" name="blog_title_category">
                 <option value="">Select blog Category</option>
                 @foreach($titles as $title)
-                <option value="{{ $title->seo_title }}">{{ $title->seo_title }}
+                <option value="{{ $title->id }}">{{ $title->seo_title }}
                 </option>
                 @endforeach
             </select>
@@ -59,7 +59,9 @@
         </div>
     </div>
 </form>
-
+</main>
+@endsection
+@section('scripts')
 <script>
 function lettersOnly(input) {
     var regex = /[^a-z ]/gi;
@@ -77,5 +79,4 @@ editor.resize(300, 500);
 <script>
 CKEDITOR.replace('editor')
 </script>
-</main>
 @endsection

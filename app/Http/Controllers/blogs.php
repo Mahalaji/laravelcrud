@@ -12,12 +12,18 @@ use Illuminate\Support\Facades\Auth;
 
 class blogs extends Controller
 {
+    public function bloglistshow(){
+        $Blogs =Blog::with('categories')->get();
+        // dd($Blogs);
+        return view('blognew',['Blogs'=>$Blogs]);
+    }
+
     public function seo_title()
     {
-        $titles = Blogcategory::select('seo_title')->get();
+        $titles = Blogcategory::select('seo_title','id')->get();
         return view('blogadd', compact('titles'));
     }
-    function addblog(Request $request) {
+        function addblog(Request $request) {
         $request->validate([
             'Title' => 'required',
             'Name' => 'required',
@@ -65,7 +71,7 @@ class blogs extends Controller
     public function getBlogsAjax(Request $request)
     {
         try {
-            $query = Blog::select('id', 'Name', 'Title', 'blog_title_category', 'Description', 'Create_Date', 'Update_Date', 'post_Date');
+            $query = Blog::select('id', 'Name', 'Title', 'blog_title_category', 'Description', 'Create_Date', 'Update_Date', 'post_Date')->with('categories');
     
             if ($request->has('start_date') && $request->has('end_date')) {
                 $startDate = $request->start_date;
@@ -103,7 +109,7 @@ class blogs extends Controller
             return redirect()->back()->with('error', 'Invalid user data');
         }
     
-        $titles = Blogcategory::select('seo_title')->get();
+        $titles = Blogcategory::select('seo_title','id')->get();
 
         return view('blogedit', compact('blog', 'titles'));
     }
@@ -166,7 +172,7 @@ public function destory($id){
 }
 public function getBlogsCategoryAjax(Request $request){
     try {
-        $query = Blogcategory::select('id', 'seo_title', 'meta_keyword', 'seo_robat', 'meta_description');
+        $query = Blogcategory::select('id', 'seo_title', 'meta_keyword', 'seo_robat', 'meta_description')->withCount('blogs');
         return DataTables::of($query)
             ->addColumn('edit', function ($row) {
                 return '<a href="/editcategory/' . $row->id . '" class="btn btn-sm btn-primary"style="color:black"><i class="fas fa-edit"></i></a>';

@@ -184,3 +184,21 @@ h2{
 .info{
     padding: 40px;
   }
+  #close-overlay-icon {
+    position: absolute; 
+    top: 10px;         
+    right: 10px;      
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 10000; 
+}
+
+
