@@ -1,5 +1,8 @@
 <?php
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\frontend\dashboard;
+use App\Http\Controllers\frontend\blogfront;
+use App\Http\Controllers\frontend\newsfront;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User;
 use App\Http\Controllers\blogs;
@@ -79,7 +82,22 @@ Route::post('/getCompanyaddress', [companies::class, 'getCompanyaddress']);
 Route::post('/deleteCompanyAddress', [companies::class, 'deleteaddress']);
 Route::post('/saveCompanyAddress', [companies::class, 'saveCompanyAddress']);
 
-Route::view('/blogview','frontend.home');
+// frontend
+
+Route::get('/dashboard', [dashboard::class, 'dashboard']);
+Route::get('/blogs', [blogfront::class, 'showblog']);
+Route::get('/news', [newsfront::class, 'shownews']);
+Route::get('/Blogs/{article}', [blogfront::class, 'blogsbyslug']);
+Route::get('/News/{article}', [newsfront::class, 'newsbyslug']);
+Route::get('/Blogtitle/{article}', [blogfront::class, 'blogsbytitle']);
+Route::get('/newstitle/{article}', [newsfront::class, 'newsbytitle']);
+
+
+
+
+// Route::get('Blog/{article}', [blogfront::class, 'blogsbycategory']);
+
+
 
 
 

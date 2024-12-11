@@ -2,11 +2,11 @@
 <div class="header">
     <nav>
         <ul>
-            <li><a href=""
+            <li><a href="/dashboard"
                     class="">Home</a></li>
-            <li><a href=""
+            <li><a href="/blogs"
                     class="">Blogs</a></li>
-            <li><a href=""
+            <li><a href="/news"
                     class="">News</a></li>
         </ul>
     </nav>

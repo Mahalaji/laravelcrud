@@ -10,4 +10,8 @@ class newscategory extends Model
     use HasFactory;
     protected $table = 'newscategory';
     public $timestamps = false;
+    public function news()
+    {
+        return $this->hasMany('App\Models\news', 'news_title_category', 'id');
+    }
 }

@@ -14,4 +14,5 @@ class Blog extends Model
     function categories(){
         return $this->hasOne('App\Models\Blogcategory','id','blog_title_category');
     }
+ 
 }
