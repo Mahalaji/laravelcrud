@@ -20,7 +20,7 @@
         </div>
     </section>
 
-    <section id="recent-posts">
+    <section id="recent-posts" style="margin-bottom: 230px;">
         <h2>Recent News</h2>
         <div class="post-grid">
 

@@ -12,11 +12,11 @@ use Illuminate\Support\Facades\Auth;
 
 class blogs extends Controller
 {
-    public function bloglistshow(){
-        $Blogs =Blog::with('categories')->get();
-        // dd($Blogs);
-        return view('blognew',['Blogs'=>$Blogs]);
-    }
+    // public function bloglistshow(){
+    //     $Blogs =Blog::with('categories')->get();
+    //     // dd($Blogs);
+    //     return view('blognew',['Blogs'=>$Blogs]);
+    // }
 
     public function seo_title()
     {
@@ -38,7 +38,9 @@ class blogs extends Controller
         $Blogadd->Name = $request->Name;
         $Blogadd->blog_title_category = $request->blog_title_category;
         $Blogadd->post_Date = $request->post_Date;
-        $Blogadd->Description = $request->Description;
+        $cleanDescription = preg_replace('/<\/?p>|<\/?strong>/', '', $request->Description); 
+    $cleanDescription = str_replace(['&nbsp;', '&#39;'], [' ', "'"], $cleanDescription);
+    $Blogadd->Description = $cleanDescription;
         $Blogadd->Create_Date = now();
         $Blogadd->Update_Date = now();
         $Blogadd->recycle =1;
@@ -92,7 +94,16 @@ class blogs extends Controller
                                 <button type="submit" class="btn btn-sm btn-danger" style="border: none; outline: none;"><i class="fas fa-trash"></i></button>
                             </form>';
                 })
-                ->rawColumns(['edit', 'delete'])
+                ->addColumn('time_ago', function ($row) {
+                    return \Carbon\Carbon::parse($row->Create_Date)->diffForHumans();
+                })
+                ->addColumn('time_update_ago', function ($row) {
+                    return \Carbon\Carbon::parse($row->Update_Date)->diffForHumans();
+                })
+                ->addColumn('time_post_ago', function ($row) {
+                    return \Carbon\Carbon::parse($row->post_Date)->diffForHumans();
+                })
+                ->rawColumns(['edit', 'delete','time_ago','time_update_ago','time_post_ago'])
                 ->make(true);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
@@ -134,7 +145,10 @@ class blogs extends Controller
     $Blogadd->Name = $request->Name;
     $Blogadd->blog_title_category = $request->blog_title_category;
     $Blogadd->post_Date = $request->post_Date;
-    $Blogadd->Description = $request->Description;
+    $cleanDescription = preg_replace('/<\/?p>|<\/?strong>/', '', $request->Description); // Remove <p> and <strong> tags
+    $cleanDescription = str_replace(['&nbsp;', '&#39;'], [' ', "'"], $cleanDescription); // Replace &nbsp; with a space and &#39; with a single quote
+    $Blogadd->Description = $cleanDescription;
+    
     $Blogadd->Update_Date = now();
 
     if ($request->hasFile('image')) {

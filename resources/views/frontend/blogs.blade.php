@@ -7,7 +7,7 @@
     <section id="recent-posts" class="col-md-9">
         <h2>Recent Blogs</h2>
         <div class="post-grid">
-            @foreach($Blogs as $row)
+            @foreach($Blogs->take(2) as  $row)
 
             <article class="featured">
 
@@ -23,7 +23,7 @@
             @endforeach
 
         </div>
-        <a href="#" id="loadMore">Load More</a>
+        <a href="#" id="load-more">Load More</a>
     </section>
     <div class="col-md-3" style=" margin-top: 40px;">
         <h5><strong>Blog Categories:-</strong></h5>
@@ -41,17 +41,61 @@
 </div>
 @endsection
 @section('scripts')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
-        $(".featured").slice(0, 2).show();
-        $("#loadMore").on("click", function(e) {
-            e.preventDefault();
-            $(".featured:hidden").slice(0, 2).slideDown();
-            if ($(".featured:hidden").length == 0) {
-                $("#loadMore").hide();
-            }
-        });
+        let itemsToShow = 2; 
+        let offset = 2;
 
-    })
-    </script>
+        $("#load-more").on("click", function(e) {
+            e.preventDefault();
+
+           
+            $.ajax({
+                url: '/ajaxblogs', 
+                type: 'GET',
+                data: {
+                    offset: offset,  
+                    limit: itemsToShow 
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status === 'success') {
+                        const blogs = response.data; 
+                        console.log(response);
+                        console.log(offset);
+                        if (blogs.length > 0) {
+                           console.log(blogs);
+                            blogs.forEach(function(blog) {
+                                const blogHtml = `
+                                    <article class="featured">
+
+                <div class="post-image">
+                <img src=" ${blog.image}" class="card-img-top" >
+                </div>
+                <div class="post-content">
+                <a href="/Blogs/ ${blog.slug}" class="text-decoration-none text-dark">
+                        <h3>${blog.Title}</h3>
+                    </a>
+                </div>
+            </article>
+                                `;
+                                $('.post-grid').append(blogHtml); 
+                            });
+                            offset += itemsToShow;
+                            if (offset >= response.count) {
+                                $('#load-more').hide();
+                            }
+                        }
+                    } else {
+                        alert('Failed to load blogs.');
+                    }
+                },
+                error: function() {
+                    alert('An error occurred while loading more blogs.');
+                }
+            });
+        });
+    });
+</script>
 @endsection

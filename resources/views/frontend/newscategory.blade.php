@@ -5,7 +5,7 @@
 @section('content')
 <div class="row">
             <section id="recent-posts" >
-                <h2>Related Blogs</h2>
+                <h2>Related News</h2>
                 <div class="post-grid">
                     @foreach($related_title_news as $news)
                     <article class="featured">

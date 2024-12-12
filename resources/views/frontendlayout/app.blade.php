@@ -14,7 +14,7 @@
     <main>
    @yield('content')
     </main>
-    @include('frontendlayout.footer')
     @yield('scripts')
+    @include('frontendlayout.footer')
 </body>
 </html>

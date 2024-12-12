@@ -269,7 +269,7 @@ a{
     height: 320px;
     width: 450px;
   }
-  #loadMore {
+  #load-more {
     width: 200px;
     color: #fff;
     display: block;
@@ -281,13 +281,13 @@ a{
     background-color: blue;
     transition: .3s;
   }
-  #loadMore:hover {
+  #load-more:hover {
     color: blue;
     background-color: #fff;
     border: 1px solid blue;
     text-decoration: none;
   }
-  #loadMore:disabled {
+  #load-more:disabled {
     background-color: #ccc;
     cursor: not-allowed;
 }

@@ -59,7 +59,6 @@ class User extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-  
 
         $user = Login::where('email', $request->email)->first();
 

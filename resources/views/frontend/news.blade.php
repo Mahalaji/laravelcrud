@@ -7,7 +7,7 @@
             <section id="recent-posts" class="col-md-9">
                 <h2>Recent News</h2>
                 <div class="post-grid">
-                    @foreach($newsview as $news)
+                    @foreach($newsview->take(2) as $news)
 
                     <article class="featured">
                         <div class="post-image">
@@ -40,17 +40,61 @@
         </div>
 @endsection
 @section('scripts')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
-        $(".featured").slice(0, 2).show();
+        let itemsToShow = 2; 
+        let offset = 2;
+
         $("#loadMore").on("click", function(e) {
             e.preventDefault();
-            $(".featured:hidden").slice(0, 2).slideDown();
-            if ($(".featured:hidden").length == 0) {
-                $("#loadMore").hide();
-            }
-        });
 
-    })
-    </script>
+           
+            $.ajax({
+                url: '/ajaxnews', 
+                type: 'GET',
+                data: {
+                    offset: offset,  
+                    limit: itemsToShow 
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status === 'success') {
+                        const news = response.data; 
+                        console.log(response);
+                        console.log(offset);
+                        if (news.length > 0) {
+                           console.log(news);
+                           news.forEach(function(news) {
+                                const blogHtml = `
+                                    <article class="featured">
+
+                <div class="post-image">
+                <img src=" ${news.Image}" class="card-img-top" >
+                </div>
+                <div class="post-content">
+                <a href="/Blogs/ ${news.slug}" class="text-decoration-none text-dark">
+                        <h3>${news.Title}</h3>
+                    </a>
+                </div>
+            </article>
+                                `;
+                                $('.post-grid').append(blogHtml); 
+                            });
+                            offset += itemsToShow;
+                            if (offset >= response.count) {
+                                $('#loadMore').hide();
+                            }
+                        }
+                    } else {
+                        alert('Failed to load news.');
+                    }
+                },
+                error: function() {
+                    alert('An error occurred while loading more news.');
+                }
+            });
+        });
+    });
+</script>
 @endsection

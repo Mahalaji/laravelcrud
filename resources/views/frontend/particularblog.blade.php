@@ -13,6 +13,7 @@
                     </div>
                     <div class="post-content">
                         <h3><strong> Title: </strong>{{ $blog['Title'] }}</h3>
+                        <!-- <h3><strong> Author Name: </strong>{{ $blog['Name'] }}</h3> -->
                         <p>{{ $blog['Description'] }}</p>
                         <p class="para"> <strong> Post Date: </strong>{{ $blog['post_Date'] }}</p>
                         <p class="para"> <strong> Update Date:</strong>{{ $blog['Update_Date'] }}</p>

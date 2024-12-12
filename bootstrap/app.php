@@ -10,8 +10,10 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-    ->withMiddleware(function (Middleware $middleware) {
-        //
+    ->withMiddleware(callback: function (Middleware $middleware) {
+        $middleware->alias([
+            'PreventBackHistory' =>app\Http\Middleware\PreventBackMiddleware::class
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

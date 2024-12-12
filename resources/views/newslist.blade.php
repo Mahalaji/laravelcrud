@@ -7,7 +7,7 @@
     <div class="container mt-4">
         <h2>News List</h2>
         <form class="left" method="post">
-            <a href="/dashboard"><i class='fas fa-eye' style='font-size:18px;color:black'></i></a>
+            <a href="/home"><i class='fas fa-eye' style='font-size:18px;color:black'></i></a>
 
             <form class="left" method="post">
                 <a href="{{ asset('/newsadd') }}"
@@ -92,17 +92,26 @@ $(document).ready(function() {
                 name: 'Description'
             },
             {
-                data: 'Create_Date',
-                name: 'Create_Date'
-            },
-            {
-                data: 'Update_Date',
-                name: 'Update_Date'
-            },
-            {
-                data: 'Date',
-                name: 'Date'
-            },
+        data: 'Create_Date',
+        name: 'Create_Date',
+        render: function(data, type, row) {
+            return row.time_ago || data; 
+        }
+    },
+    {
+        data: 'Update_Date',
+        name: 'Update_Date',
+        render: function(data, type, row) {
+            return row.time_update_ago || data; 
+        }
+    },
+    {
+        data: 'Date',
+        name: 'Date',
+        render: function(data, type, row) {
+            return row.time_date_ago || data; 
+        }
+    },
             {
                 data: 'edit',
                 orderable: false,

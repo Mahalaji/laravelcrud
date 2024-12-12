@@ -7,7 +7,7 @@
     <div class="container mt-4">
         <h2>Blogs List</h2>
         <form class="left" method="post">
-            <a href="/dashboard"><i class='fas fa-eye' style='font-size:18px;color:black'></i></a>
+            <a href="/home"><i class='fas fa-eye' style='font-size:18px;color:black'></i></a>
 
             <form class="left" method="post">
                 <a href="{{ asset('/blogadd') }}"
@@ -92,15 +92,24 @@ $(document).ready(function() {
             },
             {
                 data: 'Create_Date',
-                name: 'Create_Date'
+                name: 'Create_Date',
+                render: function(data, type, row) {
+                    return row.time_ago || data;
+                }
             },
             {
                 data: 'Update_Date',
-                name: 'Update_Date'
+                name: 'Update_Date',
+                render: function(data, type, row) {
+                    return row.time_update_ago || data;
+                }
             },
             {
                 data: 'post_Date',
-                name: 'post_Date'
+                name: 'post_Date',
+                render: function(data, type, row) {
+                    return row.time_post_ago || data;
+                }
             },
             {
                 data: 'edit',

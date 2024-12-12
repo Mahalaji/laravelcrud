@@ -20,13 +20,13 @@
                     <ion-icon name="logo-instagram"></ion-icon>
                 </a></li>
         </ul>
-        <ul class="menu">
+        <!-- <ul class="menu">
             <li class="menu_item"><a class="menu_link" href="#">Home</a></li>
             <li class="menu_item"><a class="menu_link" href="#">About</a></li>
             <li class="menu_item"><a class="menu_link" href="#">Services</a></li>
             <li class="menu_item"><a class="menu_link" href="#">Team</a></li>
             <li class="menu_item"><a class="menu_link" href="#">Contact</a></li>
 
-        </ul>
-        <p>&copy;2021 Nadine Coelho | All Rights Reserved</p>
+        </ul> -->
+        <p>&copy;2024 Ankit Mahala | All Rights Reserved</p>
     </footer>

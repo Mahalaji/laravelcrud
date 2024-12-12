@@ -35,7 +35,9 @@ class newss extends Controller
         $newsadd->Author_Name = $request->Author_Name;
         $newsadd->news_title_category = $request->news_title_category;
         $newsadd->Date = $request->Date;
-        $newsadd->Description = $request->Description;
+        $cleanDescription = preg_replace('/<\/?p>|<\/?strong>/', '', $request->Description); 
+        $cleanDescription = str_replace(['&nbsp;', '&#39;'], [' ', "'"], $cleanDescription); 
+        $newsadd->Description = $cleanDescription;
         $newsadd->Create_Date = now();
         $newsadd->Update_Date = now();
         $newsadd->recycle =1;
@@ -78,7 +80,9 @@ class newss extends Controller
                     $query->whereBetween('Date', [$startDate, $endDate]);
                 }
             }
-    
+        
+           
+        
             return DataTables::of($query)
                 ->addColumn('edit', function ($row) {
                     return '<a href="/editnews/' . $row->id . '" class="btn btn-sm btn-primary"style="color:black"><i class="fas fa-edit"></i></a>';
@@ -89,7 +93,16 @@ class newss extends Controller
                                 <button type="submit" class="btn btn-sm btn-danger" style="border: none; outline: none;"><i class="fas fa-trash"></i></button>
                             </form>';
                 })
-                ->rawColumns(['edit', 'delete'])
+                ->addColumn('time_ago', function ($row) {
+                    return \Carbon\Carbon::parse($row->Create_Date)->diffForHumans();
+                })
+                ->addColumn('time_update_ago', function ($row) {
+                    return \Carbon\Carbon::parse($row->Update_Date)->diffForHumans();
+                })
+                ->addColumn('time_date_ago', function ($row) {
+                    return \Carbon\Carbon::parse($row->Date)->diffForHumans();
+                })
+                ->rawColumns(['edit', 'delete','time_ago','time_update_ago','time_date_ago'])
                 ->make(true);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
@@ -133,7 +146,9 @@ class newss extends Controller
         $newsedit->Author_Name = $request->Author_Name;
         $newsedit->news_title_category = $request->news_title_category;
         $newsedit->Date = $request->Date;
-        $newsedit->Description = $request->Description;
+        $cleanDescription = preg_replace('/<\/?p>|<\/?strong>/', '', $request->Description); 
+        $cleanDescription = str_replace(['&nbsp;', '&#39;'], [' ', "'"], $cleanDescription);
+        $newsedit->Description = $cleanDescription;
         $newsedit->Update_Date = now();
         $newsedit->recycle =1;
     

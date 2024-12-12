@@ -2,22 +2,26 @@
 <div class="header">
     <nav>
         <ul>
-            <li><a href="/dashboard"
-                    class="">Home</a></li>
-            <li><a href="/blogs"
-                    class="">Blogs</a></li>
-            <li><a href="/news"
-                    class="">News</a></li>
+            <li>
+                <a href="/home" class="{{ request()->is('dashboard') ? 'active' : '' }}">Home</a>
+            </li>
+            <li>
+                <a href="/blogs" class="{{ request()->is('blogs') ? 'active' : '' }}">Blogs</a>
+            </li>
+            <li>
+                <a href="/news" class="{{ request()->is('news') ? 'active' : '' }}">News</a>
+            </li>
         </ul>
     </nav>
-    <div class="sides"> <a href="#" class="menu"> </a></div>
+    <div class="sides">
+        <a href="#" class="menu"></a>
+    </div>
     <div class="info">
-
-        <h4><a href="#category">UI DESIGN</a></h4>
-        <h1>KEN BURNS HEADERS ARE THE BEST</h1>
+        <h4><a href="#category">Welcome</a></h4>
+        <h1>Blogs share opinions, News reports facts.</h1>
         <div class="meta">
             <a href="https://twitter.com/nodws" target="_b" class="author"></a><br>
-            By <a href="https://twitter.com/nodws" target="_b">James Nodws</a> on May 30, 2019
+            By <a href="https://twitter.com/nodws" target="_b">Mahala ji</a> on Dec 10, 2024
         </div>
     </div>
 </div>

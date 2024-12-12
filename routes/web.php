@@ -11,7 +11,9 @@ use App\Http\Controllers\pagess;
 use App\Http\Controllers\companies;
 
 
-
+Route::middleware(['PreventBackHistory'])->group(function(){
+    
+});
 
 Route::get('/', function () {
     return view('welcome');
@@ -35,8 +37,8 @@ Route::post('/delete-user/{id}', [User::class, 'deleteuser']);
 
 Route::get('/blogadd', [blogs::class, 'seo_title']);
 Route::post('/addblog',[blogs::class,'addblog']);
-// Route::view('/bloglist','blog');
-Route::get('/bloglist', [blogs::class, 'bloglistshow']);
+Route::view('/bloglist','blog');
+Route::post('/getBlogsAjax', [blogs::class, 'getBlogsAjax']);
 Route::get('/edit/{id}', [blogs::class, 'edit']);
 Route::post('/update',[blogs::class,'update']);
 Route::post('/destory/{id}', [blogs::class, 'destory']);
@@ -84,18 +86,17 @@ Route::post('/saveCompanyAddress', [companies::class, 'saveCompanyAddress']);
 
 // frontend
 
-Route::get('/dashboard', [dashboard::class, 'dashboard']);
+Route::get('/home', [dashboard::class, 'dashboard']);
 Route::get('/blogs', [blogfront::class, 'showblog']);
 Route::get('/news', [newsfront::class, 'shownews']);
 Route::get('/Blogs/{article}', [blogfront::class, 'blogsbyslug']);
 Route::get('/News/{article}', [newsfront::class, 'newsbyslug']);
 Route::get('/Blogtitle/{article}', [blogfront::class, 'blogsbytitle']);
 Route::get('/newstitle/{article}', [newsfront::class, 'newsbytitle']);
+Route::get('/ajaxblogs', [blogfront::class, 'loadMoreBlogs'])->name('ajaxblogs');
+Route::get('/ajaxnews', [newsfront::class, 'loadMoreNews'])->name('ajaxnews');
 
 
-
-
-// Route::get('Blog/{article}', [blogfront::class, 'blogsbycategory']);
 
 
 

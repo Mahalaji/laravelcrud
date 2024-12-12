@@ -34,4 +34,25 @@ class newsfront extends Controller
             'related_title_news' => $related_title_news,
         ]);
     }
+    public function loadMoreNews(Request $request)
+{
+    $offset = $request->input('offset', 0);  
+    $limit = $request->input('limit', 2);  
+
+    $news = news::skip($offset)->take($limit)->get();  
+    $count = news::count();
+ 
+    $data = $news->map(function ($news) {
+        return [
+            'Title' => $news->Title,
+            'slug' => $news->slug,
+            'Image' => asset($news->Image),  
+        ];
+    });
+    return response()->json([
+        'status' => 'success',
+        'data' => $data,
+        'count'=>$count,
+    ]);
+}
 }
